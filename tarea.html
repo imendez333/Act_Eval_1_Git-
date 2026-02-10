@@ -112,7 +112,8 @@
 <body>
     <h1>Gestor de tareas</h1>
     <p class="muted">Plantilla base para la actividad de Git. Completa las funciones marcadas como
-        <strong>TODO</strong>.</p>
+        <strong>TODO</strong>.
+    </p>
 
     <div class="panel">
         <input id="taskInput" type="text" placeholder="Escribe una tarea (ej: 'Estudiar Git')" />
@@ -211,6 +212,24 @@
             setStatus("Tarea añadida correctamente.", "ok");
             render();
         }
+        function deleteSelected() {
+            if (selectedId === null) {
+                setStatus("Selecciona una tarea antes de eliminar.", "danger");
+                return;
+            }
+            const before tasks.length;
+            tasks = tasks.filter(t => t.id !== selectedId);
+            if (tasks.length === before) {
+                // Por si selectedId apunta a una tarea que ya no existe
+                setStatus("No se encontró la tarea seleccionada para eliminar.", "danger")
+                selectedId = null;
+                render();
+                return;
+            }
+            setStatus('Tarea eliminada(ID $(selectedId)).', "ok") selectedId = null;
+            render();
+        }
+        9 Realiza un commit con el mensaje exacto
         // =========================
         // TODO: Funciones a implementar por el alumnado
         // =========================
